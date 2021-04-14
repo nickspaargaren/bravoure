@@ -37,30 +37,29 @@ const GlobalStyle = createGlobalStyle`
   .interface .itemDetail {position: absolute; background: #fff; width: 400px; top: 0; right: 0; min-height: 100vh;}
   .interface .itemDetail .sluiten {position: absolute; top: 20px; right: 20px; z-index: 1; padding: 5px; font-size: 40px; color: #fff; line-height: 0; background: rgba(0,0,0,.2); border-radius: 40px;}
   .interface .itemDetail .sluiten:hover {cursor: pointer;} 
-  .interface .itemDetail .afbeelding {line-height: 0; height: 400px;}
+  .interface .itemDetail .afbeelding {line-height: 0;}
   .interface .itemDetail .afbeelding div {width: 100%;}
   .interface .itemDetail .afbeelding div img {object-fit: cover;}
   .interface .itemDetail .content {padding: 40px; border-top: 1px solid #eaeaea;}
   .interface .itemDetail .content.info {display: flex;}
-  .interface .itemDetail .content.info > div {margin: auto 0;}
+  .interface .itemDetail .content.info .omschrijving, 
+  .interface .itemDetail .content.info .rating {margin: auto 0;}
   .interface .itemDetail .content.info .rating {display: flex; margin-left: auto;}
   .interface .itemDetail .content.info .rating > * {margin: auto 0;}
   .interface .itemDetail .content.info .rating svg {fill: #EFD358; font-size: 30px; margin-right: 6px;}
 
   .bg {position: fixed; background: #000; top: 0; left: 0; right: 0; bottom: 0; user-select: none;}
-  .bg div {width: 100%;}
+  .bg div {width: 100%; height: 100%;}
   .bg div img {width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: .4;}
 
   @media (max-width: 1080px) {
     .interface .inhoud {padding: 20px; min-height: auto;}
     .interface .inhoud .header {margin: 0 0 20px; padding: 0;}
-    .interface .itemDetail {
-    width: auto;
-    top: 20px;
-    right: 20px;
-    left: 20px;
-    min-height: auto;
-    }
+    .interface .itemDetail {width: auto; top: 20px; right: 20px; left: 20px; min-height: auto;}
+    .interface .itemDetail .content {padding: 20px;}
+    .interface .itemDetail .content.info .omschrijving {display: flex; flex-direction: column; line-height: 1.5em;}
+    .interface .itemDetail .content.info .omschrijving .sep {display: none;}
+    .interface .itemDetail .content.info .omschrijving .date {opacity: .65;}
   }
 
 
