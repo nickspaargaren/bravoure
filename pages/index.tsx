@@ -29,7 +29,7 @@ const Home = ({general, episodes}) => {
     )
   }
 
-  const [carrouselState, setCarrouselState] = useState(0);
+  const [carrouselState, setCarrouselState] = useState({scroll: 0, pijlLinks: 'disabled', pijlRechts: ''});
   const carrouselRef = useRef(null);
 
   const itemWidth = 180;
@@ -38,11 +38,15 @@ const Home = ({general, episodes}) => {
 
     const maxWidth = carrouselRef.current.childElementCount * itemWidth - itemWidth;
 
-    if(actie === '+' && maxWidth > carrouselState) {
-      setCarrouselState(prevState => (prevState + itemWidth));
-    } else if (actie === '-' && carrouselState > 0) {
-      setCarrouselState(prevState => (prevState - itemWidth));
-    }
+    if(actie === '+' && maxWidth > carrouselState.scroll && (maxWidth - itemWidth) !== carrouselState.scroll) { // Standaard volgende scroll
+      setCarrouselState(prevState => ({...carrouselState, pijlLinks: '', scroll: (prevState.scroll + itemWidth)}));
+    } else if (actie === '+' && (maxWidth - itemWidth) === carrouselState.scroll) { // Einde bereikt
+      setCarrouselState(prevState => ({...carrouselState, pijlLinks: '', pijlRechts: 'disabled', scroll: (prevState.scroll + itemWidth)}));
+    } else if (actie === '-' && carrouselState.scroll > itemWidth) { // Terug
+      setCarrouselState(prevState => ({...carrouselState, pijlRechts: '', scroll: (prevState.scroll - itemWidth)}));
+    } else if (actie === '-' && carrouselState.scroll === itemWidth) { // Terug en einde bereikt
+      setCarrouselState(prevState => ({...carrouselState, pijlLinks: 'disabled', pijlRechts: '', scroll: 0}));
+    } 
 
   }
 
@@ -58,7 +62,7 @@ const Home = ({general, episodes}) => {
               <div className="episodes">
                 <div className="row" ref={carrouselRef}>
                   {episodes.Episodes.map((item, index) => (
-                    <div className="item" style={{ transform: `translateX(-${carrouselState}px)` }} key={index} onClick={() => setActiefItem(item)}>
+                    <div className="item" style={{ transform: `translateX(-${carrouselState.scroll}px)` }} key={index} onClick={() => setActiefItem(item)}>
                       <div className="afbeelding"><Image src={`/images/aflevering-${item.Episode}.png`} width={160} height={106} alt={item.Title} /></div>
                       <div className="id">{item.Episode}</div>
                       <h3>{item.Title}</h3>
@@ -67,8 +71,8 @@ const Home = ({general, episodes}) => {
                   ))}
                 </div>
                 <div className="navigatie">
-                  <div onClick={() => carrousel('-')}><MdKeyboardBackspace /></div>
-                  <div onClick={() => carrousel('+')}><MdKeyboardBackspace style={{ transform: 'rotate(180deg)' }} /></div>
+                  <div className={carrouselState.pijlLinks} onClick={() => carrousel('-')}><MdKeyboardBackspace /></div>
+                  <div className={carrouselState.pijlRechts} onClick={() => carrousel('+')}><MdKeyboardBackspace style={{ transform: 'rotate(180deg)' }} /></div>
                 </div>
               </div>
             </div>

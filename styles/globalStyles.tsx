@@ -31,7 +31,8 @@ const GlobalStyle = createGlobalStyle`
   .interface .inhoud .episodes .row .item .id {position: absolute; left: 0; top: 0; background: #fff; line-height: 1; color: #000; font-weight: bold; padding: 10px 13px;}
   
   .interface .inhoud .episodes .navigatie {display: inline-grid; grid-gap: 10px; grid-template-columns: 1fr 1fr; line-height: 0; font-size: 30px;}
-  .interface .inhoud .episodes .navigatie div:hover {opacity: .8; cursor: pointer;}
+  .interface .inhoud .episodes .navigatie div:hover {cursor: pointer;}
+  .interface .inhoud .episodes .navigatie div.disabled {opacity: .5; cursor: default;}
 
   .interface .itemDetail {position: absolute; background: #fff; width: 400px; top: 0; right: 0; min-height: 100vh;}
   .interface .itemDetail .sluiten {position: absolute; top: 20px; right: 20px; z-index: 1; padding: 5px; font-size: 40px; color: #fff; line-height: 0; background: rgba(0,0,0,.2); border-radius: 40px;}
@@ -51,8 +52,8 @@ const GlobalStyle = createGlobalStyle`
   .bg div img {width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: .4;}
 
   @media (max-width: 1080px) {
-    .interface .inhoud {padding: 20px;}
-    .interface .inhoud .header {padding: 0;}
+    .interface .inhoud {padding: 20px; min-height: auto;}
+    .interface .inhoud .header {margin: 0 0 20px; padding: 0;}
     .interface .itemDetail {
     width: auto;
     top: 20px;
