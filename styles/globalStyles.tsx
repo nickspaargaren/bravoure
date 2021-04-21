@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   .sub {font-size: 23px; opacity: 1;}
   .sub + h1 {margin-top: -10px;}
 
-  p {margin: 0 0 10px; font-size: 13px; opacity: .8;}
+  p {margin: 0 0 10px; font-size: 14px; opacity: .8;}
 
   .interface {position: relative; z-index: 1;}
   .interface .overview {min-height: 100vh; padding: 100px 100px 50px 100px; box-sizing: border-box; color: #fff; overflow: hidden; display: flex; flex-direction: column;}

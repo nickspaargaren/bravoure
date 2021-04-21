@@ -7,7 +7,7 @@ const EpisodesCarrousel = ({data, setActiefItem}) => {
   const [carrouselState, setCarrouselState] = useState({scroll: 0, arrowLeft: 'disabled', arrowRight: ''});
   const carrouselRef = useRef(null);
 
-  const itemWidth = 270;
+  const itemWidth = 280;
 
   const carrousel = (action: '+' | '-') => {
 
@@ -43,8 +43,8 @@ const EpisodesCarrousel = ({data, setActiefItem}) => {
     </div>
     <div className="inner bottom">
       <div className="navigation">
-        <div className={carrouselState.arrowLeft} onClick={() => carrousel('-')}><MdKeyboardBackspace /></div>
-        <div className={carrouselState.arrowRight} onClick={() => carrousel('+')}><MdKeyboardBackspace style={{ transform: 'rotate(180deg)' }} /></div>
+        <div className={carrouselState.arrowLeft} onClick={() => carrousel('-')} style={{ transform: 'rotate(180deg)' }}><Image src={`/icons/tail-right.svg`} width={28} height={18} /></div>
+        <div className={carrouselState.arrowRight} onClick={() => carrousel('+')}><Image src={`/icons/tail-right.svg`} width={28} height={18} /></div>
       </div>
     </div>
   </div>
