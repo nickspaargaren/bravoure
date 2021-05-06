@@ -4,28 +4,28 @@ import { MdKeyboardBackspace } from "react-icons/md";
 
 const EpisodesCarrousel = ({data, setActiefItem}) => {
 
-  const [carrouselState, setCarrouselState] = useState({scroll: 0, pijlLinks: 'disabled', pijlRechts: ''});
+  const [carrouselState, setCarrouselState] = useState({scroll: 0, arrowLeft: 'disabled', arrowRight: ''});
   const carrouselRef = useRef(null);
 
-  const itemWidth = 180;
+  const itemWidth = 280;
 
-  const carrousel = (actie: '+' | '-') => {
+  const carrousel = (action: '+' | '-') => {
 
     const maxWidth = carrouselRef.current.childElementCount * itemWidth - itemWidth;
 
-    if(actie === '+' && maxWidth > carrouselState.scroll && (maxWidth - itemWidth) !== carrouselState.scroll) { // Standaard volgende scroll
-      setCarrouselState(prevState => ({...carrouselState, pijlLinks: '', scroll: (prevState.scroll + itemWidth)}));
-    } else if (actie === '+' && (maxWidth - itemWidth) === carrouselState.scroll) { // Einde bereikt
-      setCarrouselState(prevState => ({...carrouselState, pijlLinks: '', pijlRechts: 'disabled', scroll: (prevState.scroll + itemWidth)}));
-    } else if (actie === '-' && carrouselState.scroll > itemWidth) { // Terug
-      setCarrouselState(prevState => ({...carrouselState, pijlRechts: '', scroll: (prevState.scroll - itemWidth)}));
-    } else if (actie === '-' && carrouselState.scroll === itemWidth) { // Terug en einde bereikt
-      setCarrouselState(prevState => ({...carrouselState, pijlLinks: 'disabled', pijlRechts: '', scroll: 0}));
+    if(action === '+' && maxWidth > carrouselState.scroll && (maxWidth - itemWidth) !== carrouselState.scroll) { // Standaard volgende scroll
+      setCarrouselState(prevState => ({...carrouselState, arrowLeft: '', scroll: (prevState.scroll + itemWidth)}));
+    } else if (action === '+' && (maxWidth - itemWidth) === carrouselState.scroll) { // Einde bereikt
+      setCarrouselState(prevState => ({...carrouselState, arrowLeft: '', arrowRight: 'disabled', scroll: (prevState.scroll + itemWidth)}));
+    } else if (action === '-' && carrouselState.scroll > itemWidth) { // Terug
+      setCarrouselState(prevState => ({...carrouselState, arrowRight: '', scroll: (prevState.scroll - itemWidth)}));
+    } else if (action === '-' && carrouselState.scroll === itemWidth) { // Terug en einde bereikt
+      setCarrouselState(prevState => ({...carrouselState, arrowLeft: 'disabled', arrowRight: '', scroll: 0}));
     }
   
   }
 
-  const maakactief = useCallback((item) => {
+  const setactive = useCallback((item) => {
     setActiefItem(item)
   }, [setActiefItem])
 
@@ -33,17 +33,19 @@ const EpisodesCarrousel = ({data, setActiefItem}) => {
     <div className="episodes">
     <div className="row" ref={carrouselRef}>
       {data.Episodes.map((item, index) => (
-        <div className="item" style={{ transform: `translateX(-${carrouselState.scroll}px)` }} key={index} onClick={() => {maakactief(item)}}>
-          <div className="afbeelding"><Image src={`/images/aflevering-${item.Episode}.png`} width={160} height={106} alt={item.Title} /></div>
+        <div className="item" style={{ transform: `translateX(-${carrouselState.scroll}px)` }} key={index} onClick={() => {setactive(item)}}>
+          <div className="image"><Image src={`/images/episode-${item.Episode}.png`} width={272} height={180} alt={item.Title} /></div>
           <div className="id">{item.Episode}</div>
           <h3>{item.Title}</h3>
           <p>{item.Released}</p>
         </div>
       ))}
     </div>
-    <div className="navigatie">
-      <div className={carrouselState.pijlLinks} onClick={() => carrousel('-')}><MdKeyboardBackspace /></div>
-      <div className={carrouselState.pijlRechts} onClick={() => carrousel('+')}><MdKeyboardBackspace style={{ transform: 'rotate(180deg)' }} /></div>
+    <div className="inner bottom">
+      <div className="navigation">
+        <div className={carrouselState.arrowLeft} onClick={() => carrousel('-')} style={{ transform: 'rotate(180deg)' }}><Image src={`/icons/tail-right.svg`} width={28} height={18} /></div>
+        <div className={carrouselState.arrowRight} onClick={() => carrousel('+')}><Image src={`/icons/tail-right.svg`} width={28} height={18} /></div>
+      </div>
     </div>
   </div>
   )

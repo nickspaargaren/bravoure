@@ -5,24 +5,27 @@ import { MdClose } from 'react-icons/md';
 
 const ActiefItem = ({data, setActiefItem}) => {
 
-  const sluiten = useCallback(() => {
+  const close = useCallback(() => {
     setActiefItem(null)
   }, [setActiefItem])
 
   return (
+    <>
     <div className="itemDetail">
-      <div className="sluiten" onClick={sluiten}><MdClose/></div>
+      <div className="close" onClick={close}><MdClose/></div>
 
-      <div className="afbeelding"><Image src={`/images/aflevering-${data.Episode}.png`} width={400} height={400} alt={data.Title} /></div>
+      <div className="image"><Image src={`/images/episode-${data.Episode}.png`} width={400} height={400} alt={data.Title} /></div>
 
       <div className="content info">
-        <div className="omschrijving"><span>Episode {data.Episode}</span> <span className="sep">—</span> <span className="date">{data.Released}</span></div>
+        <div className="description"><span>Episode {data.Episode}</span> <span className="sep">—</span> <span className="date">{data.Released}</span></div>
         <Rating rating={data.imdbRating} />
       </div>
       <div className="content">
         <h2>{data.Title}</h2>
       </div>
     </div>
+    <div className="itemDetailBg" onClick={close}></div>
+    </>
   )
 }
 

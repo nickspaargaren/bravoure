@@ -12,9 +12,9 @@ const Home = ({general, episodes}) => {
   return (
         <Layout title={`${general.Title} | Season ${episodes.Season}`} description={general.Plot}>
           <div className="interface">
-            <div className="inhoud">
-              <div className="header">
-                <p>Season {episodes.Season}</p>
+            <div className="overview">
+              <div className="inner top">
+                <p className="sub">Season {episodes.Season}</p>
                 <h1>{general.Title}</h1>
                 <p className="sub">{general.Plot}</p>
               </div>
